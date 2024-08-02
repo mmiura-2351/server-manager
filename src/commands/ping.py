@@ -1,4 +1,6 @@
-def ping_command(interaction: discord.Interaction) -> None:
+import discord
+
+async def ping_command(interaction: discord.Interaction) -> None:
     """
     Responds with Pong
     """

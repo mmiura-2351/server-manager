@@ -1,5 +1,5 @@
 import discord
-import commands
+from commands.ping import ping_command
 
 def SetupCommands(tree):
     """
@@ -10,5 +10,5 @@ def SetupCommands(tree):
         tree (app_commands.CommandTree): The CommandTree instance to register commands to
     """
     @tree.command(name="ping", description="Responds with pong")
-    async def ping(interaction: discord.Interaction) -> None:
+    async def _ping(interaction: discord.Interaction) -> None:
         await ping_command(interaction)
