@@ -68,7 +68,6 @@ def get_commands():
                 "required": True,
             })
 
-    print(commands)
     return commands
 
 def sync_commands(mode: str):
