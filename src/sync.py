@@ -57,6 +57,18 @@ def get_commands():
                 parse_mode = ""
                 parsing_block = ""
 
+        # Extract describe when @discord.app_commands.describe is found in the line.
+        if "@discord.app_commands.describe" in line:
+            option_name = line.split("=")[0].strip().split("(")[1]
+            description = line.split("=")[1].strip().strip('"').replace(")", "")
+            commands[-1]["options"].append({
+                "name": option_name,
+                "description": description,
+                "type": 3,
+                "required": True,
+            })
+
+    print(commands)
     return commands
 
 def sync_commands(mode: str):
