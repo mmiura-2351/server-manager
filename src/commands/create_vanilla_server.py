@@ -2,13 +2,14 @@ import os
 import discord
 import subprocess
 from dotenv import load_dotenv
+from commands.utils.get_server_path import get_server_path
 
 async def create_vanilla_server_command(interaction: discord.Interaction, version: str, server_name: str) -> None:
     await interaction.response.defer(thinking=True)
     load_dotenv()
 
     # Get Server Path
-    server_path = os.getenv("SERVER_PATH_ABS")
+    server_path = get_server_path()
     mss = os.getenv("SERVER_SETUP_PATH_ABS")
 
     if not server_path:

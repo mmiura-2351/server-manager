@@ -1,13 +1,13 @@
 import os
 import discord
 import subprocess
-from dotenv import load_dotenv
+from commands.utils.get_ip import get_ip
+from commands.utils.get_server_path import get_server_path
 
 async def show_all_servers_command(interaction: discord.Interaction) -> None:
     await interaction.response.defer(thinking=True)
-    load_dotenv()
 
-    server_path = os.getenv("SERVER_PATH_ABS")
+    server_path = get_server_path()
 
     if not server_path:
         await interaction.followup.send("Server path is not set.", ephemeral=True)
@@ -44,12 +44,3 @@ async def show_all_servers_command(interaction: discord.Interaction) -> None:
             await interaction.followup.send("No servers found.", ephemeral=True)
     except subprocess.CalledProcessError as e:
         await interaction.followup.send(f"An error occurred while getting the servers: {e.stderr}", ephemeral=True)
-
-def get_ip():
-    """
-    Get Global IPv4 IP Address
-    return:
-        ip_address: string
-    """
-    ip_address = subprocess.check_output(["curl", "-s", "https://api.ipify.org"]).decode("utf-8").strip()
-    return ip_address

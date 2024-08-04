@@ -2,13 +2,13 @@ import os
 import discord
 import subprocess
 import time
-from dotenv import load_dotenv
+from commands.utils.get_ip import get_ip
+from commands.utils.get_server_path import get_server_path
 
 async def start_minecraft_server_command(interaction: discord.Integration, server_name: str) -> None:
     await interaction.response.defer(thinking=True)
-    load_dotenv()
 
-    server_path = os.getenv("SERVER_PATH_ABS")
+    server_path = get_server_path()
     server_ip = get_ip()
     server_port = 25565
 
@@ -47,15 +47,6 @@ async def start_minecraft_server_command(interaction: discord.Integration, serve
             return
 
     await interaction.followup.send("Failed to start the server after 3 attempts.", ephemeral=True)
-
-def get_ip():
-    """
-    Get Global IPv4 IP Address
-    return:
-        ip_address: string
-    """
-    ip_address = subprocess.check_output(["curl", "-s", "https://api.ipify.org"]).decode("utf-8").strip()
-    return ip_address
 
 def set_server_port(server_path, server_name, port):
     """
