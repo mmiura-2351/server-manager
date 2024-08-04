@@ -3,6 +3,7 @@ from commands.ping import ping_command
 from commands.create_vanilla_server import create_vanilla_server_command
 from commands.start_minecraft_server import start_minecraft_server_command
 from commands.close_minecraft_server import close_minecraft_server_command
+from commands.show_all_servers import show_all_servers_command
 
 def SetupCommands(tree):
     """
@@ -31,3 +32,7 @@ def SetupCommands(tree):
     @discord.app_commands.describe(server_name="Server name")
     async def _close_minecraft_server(interaction: discord.Interaction, server_name: str) -> None:
         await close_minecraft_server_command(interaction, server_name)
+
+    @tree.command(name="list", description="Show All Servers")
+    async def _show_all_servers(interaction: discord.Interaction) -> None:
+        await show_all_servers_command(interaction)
