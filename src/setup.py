@@ -2,7 +2,7 @@ import discord
 from commands.ping import ping_command
 from commands.create_vanilla_server import create_vanilla_server_command
 from commands.start_minecraft_server import start_minecraft_server_command
-
+from commands.close_minecraft_server import close_minecraft_server_command
 
 def SetupCommands(tree):
     """
@@ -26,3 +26,8 @@ def SetupCommands(tree):
     @discord.app_commands.describe(server_name="Server name")
     async def _start_minecraft_server(interaction: discord.Interaction, server_name: str) -> None:
         await start_minecraft_server_command(interaction, server_name)
+
+    @tree.command(name="server-close", description="Stop Minecraft Server")
+    @discord.app_commands.describe(server_name="Server name")
+    async def _close_minecraft_server(interaction: discord.Interaction, server_name: str) -> None:
+        await close_minecraft_server_command(interaction, server_name)
