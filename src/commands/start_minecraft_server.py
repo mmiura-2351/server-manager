@@ -16,6 +16,12 @@ async def start_minecraft_server_command(interaction: discord.Integration, serve
         await interaction.followup.send("Server path is not set.", ephemeral=True)
         return
 
+    # Check Server directory
+    server_directory = os.path.join(server_path, server_name)
+    if not os.path.exists(server_directory):
+        await interaction.followup.send(f"Server '{server_name}' is not exist.", ephemeral=True)
+        return
+
     # Ensure the server port is set to 25565
     set_server_port(server_path, server_name, server_port)
 
