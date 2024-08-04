@@ -1,4 +1,5 @@
 import os
+import time
 import argparse
 import requests
 from dotenv import load_dotenv
@@ -112,6 +113,7 @@ def sync_commands(mode: str):
                 print(f"{command_data["name"].capitalize()} command synced.")
             else:
                 print("Failed to sync command:", response.json())
+        time.sleep(0.5)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Sync Discord commands.")
