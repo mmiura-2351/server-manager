@@ -16,18 +16,18 @@ def SetupCommands(tree):
     async def _ping(interaction: discord.Interaction) -> None:
         await ping_command(interaction)
 
-    @tree.command(name="server-create", description="Create Vanilla Server")
+    @tree.command(name="create", description="Create Vanilla Server")
     @discord.app_commands.describe(version="Server Version")
     @discord.app_commands.describe(server_name="Server name")
     async def _create_vanilla_server(interaction: discord.Interaction, version: str, server_name: str) -> None:
         await create_vanilla_server_command(interaction, version, server_name)
 
-    @tree.command(name="server-start", description="Start Minecraft Server")
+    @tree.command(name="start", description="Start Minecraft Server")
     @discord.app_commands.describe(server_name="Server name")
     async def _start_minecraft_server(interaction: discord.Interaction, server_name: str) -> None:
         await start_minecraft_server_command(interaction, server_name)
 
-    @tree.command(name="server-close", description="Stop Minecraft Server")
+    @tree.command(name="close", description="Stop Minecraft Server")
     @discord.app_commands.describe(server_name="Server name")
     async def _close_minecraft_server(interaction: discord.Interaction, server_name: str) -> None:
         await close_minecraft_server_command(interaction, server_name)
