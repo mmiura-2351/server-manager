@@ -1,4 +1,5 @@
 import os
+import socket
 import discord
 import subprocess
 from dotenv import load_dotenv
@@ -8,6 +9,7 @@ async def start_minecraft_server_command(interaction: discord.Integration, serve
     load_dotenv()
 
     server_path = os.getenv("SERVER_PATH_ABS")
+    server_ip = get_ip()
 
     if not server_path:
         await interaction.followup.send("Server path is not set.", ephemeral=True)
@@ -18,6 +20,15 @@ async def start_minecraft_server_command(interaction: discord.Integration, serve
     try:
         # Start Server
         _result = subprocess.run(command, shell=True, check=True, text=True, capture_output=True)
-        await interaction.followup.send(f"Server '{server_name}' has been started.", ephemeral=True)
+        await interaction.followup.send(f"Server '{server_name}' has been started.\n**IP**\n```{server_ip}```", ephemeral=True)
     except subprocess.CalledProcessError as e:
         await interaction.followup.send(f"An error occurred while starting the server: {e.stderr}", ephemeral=True)
+
+def get_ip():
+    """
+    Get Global IPv4 IP Address
+    return:
+        ip_address: string
+    """
+    ip_address = subprocess.check_output(["curl", "-s", "https://api.ipify.org"]).decode("utf-8").strip()
+    return ip_address
