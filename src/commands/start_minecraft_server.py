@@ -1,5 +1,4 @@
 import os
-import socket
 import discord
 import subprocess
 from dotenv import load_dotenv
